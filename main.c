@@ -9,6 +9,17 @@ void swap(int *x,int *y)
     *y=temp;
 }
 
+void bubblesort(int arr[], int size){
+    for(int i = 0; i < size; i++){
+        for(int j = 0; j < size-i; j++){
+            if(arr[j] > arr[j+1]){
+                int temp = arr[j+1];
+                arr[j+1] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+}
 
 bool isSorted(int arr[], int size){
     for(int i = 0; i < size-1; i++){
@@ -81,6 +92,12 @@ int main()
     displayArray(array4, 7);
     quickSort(array4, 0, 6);
     displayArray(array4, 7);
+
+    printf("Array 1 bubblesort: \n");
+    int array1a[] = {5, 3, 4, 7, 1, 6, 2};
+    displayArray(array1a, 7);
+    bubblesort(array1a, 6);
+    displayArray(array1a, 7);
 
     return 0;
 }
