@@ -10,6 +10,16 @@ void swap(int *x,int *y)
     *y = temp;
 }
 
+int maxOfArray(int arr[], int size){
+    int max = arr[0];
+    for(int i = 1; i < size; i++){
+        if(arr[i] > max){
+            max = arr[i];
+        }
+    }
+    return max;
+}
+
 bool isSorted(int arr[], int size){
     for(int i = 0; i < size-1; i++){
         if(arr[i] > arr[i+1]){
@@ -126,6 +136,55 @@ void RMergeSort(int arr[], int lo, int hi){
     }
 }
 
+// Count sort
+void countSort(int arr[], int size){
+    int j = 0, k= 0, arrayMax = maxOfArray(arr, size);
+    int *buffer = (int *)malloc(((arrayMax + 1) * sizeof(int)));
+
+    for(int i = 0; i <= arrayMax; i++){
+        buffer[i] = 0;
+    }
+    for(int i = 0; i < size; i++){
+        buffer[arr[i]]++;
+    }
+    while(j <= arrayMax){
+        if(buffer[j] > 0){
+            arr[k++] = j;
+            buffer[j]--;
+        }
+        if(buffer[j] == 0){
+            j++;
+        }
+    }
+    free(buffer);
+}
+
+void CountSort(int A[],int n)
+{
+    int i,j,max,*C;
+    max=maxOfArray(A,n);
+    C=(int *)malloc(sizeof(int)*(max+1));
+    for(i=0;i<max+1;i++)
+    {
+        C[i]=0;
+    }
+    for(i=0;i<n;i++)
+    {
+        C[A[i]]++;
+    }
+    i=0;j=0;
+    while(j<max+1)
+    {
+        if(C[j]>0)
+        {
+            A[i++]=j;
+            C[j]--;
+        }
+        else
+            j++;
+    }
+}
+
 int main()
 {
     printf("Array 1: \n");
@@ -187,6 +246,12 @@ int main()
     int array2e[] = {3, 5, -4, 7, 1, 6, -2, 8, 75};
     RMergeSort(array2e, 0,8);
     displayArray(array2e, 9);
+
+    printf("Array 5 countsort: \n");
+    int arr5[] = {4, 7, 3, 9, 7, 6};
+    displayArray(arr5, 6);
+    countSort(arr5, 6);
+    displayArray(arr5, 6);
 
     return 0;
 }
