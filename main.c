@@ -26,7 +26,6 @@ void displayArray(int arr[], int size){
     }
 }
 
-
 // Bubblesort
 void bubblesort(int arr[], int size){
     //for passes
@@ -65,6 +64,7 @@ int partition(int arr[], int lo, int hi){
 
 void quickSort(int arr[], int lo, int hi){
     if(!isSorted(arr, hi+1)){
+        //l == h means there is only one element
         if(lo < hi){
             int pivot = partition(arr, lo, hi);
             quickSort(arr, lo, pivot);
@@ -113,6 +113,16 @@ void IMergeSort(int arr[], int size){
     //In case array is of odd size, one element is remaining and p/2 = size-1
     if(p/2 < size){
         merge(arr, 0, p/2 - 1, size);
+    }
+}
+
+void RMergeSort(int arr[], int lo, int hi){
+    int mid;
+    if(lo < hi){
+        mid = (lo + hi)/2;
+        RMergeSort(arr, lo, mid);
+        RMergeSort(arr, mid+1, hi);
+        merge(arr, lo, mid, hi);
     }
 }
 
@@ -167,6 +177,16 @@ int main()
     int array2c[] = {3, 5, -4, 7, 1, 6, -2, 8, 75};
     IMergeSort(array2c, 9);
     displayArray(array2c, 9);
+
+    printf("Array 2 recursive mergesort (even values): \n");
+    int array2d[] = {3, 5, -4, 8, 1, 6};
+    RMergeSort(array2d, 0, 5);
+    displayArray(array2d, 6);
+
+    printf("Array 2 recursive mergesort (odd values): \n");
+    int array2e[] = {3, 5, -4, 7, 1, 6, -2, 8, 75};
+    RMergeSort(array2e, 0,8);
+    displayArray(array2e, 9);
 
     return 0;
 }
