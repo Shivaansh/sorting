@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+struct Node {
+    int value;
+    struct Node *next;
+};
+
 //Helper methods
 void swap(int *x,int *y)
 {
@@ -18,6 +23,15 @@ int maxOfArray(int arr[], int size){
         }
     }
     return max;
+}
+
+ int numOfDigits(int number){
+    int count = 1;
+    while(number >= 10){
+        count++;
+        number = number/10;
+    }
+    return count;
 }
 
 bool isSorted(int arr[], int size){
@@ -159,29 +173,21 @@ void countSort(int arr[], int size){
     free(buffer);
 }
 
-void CountSort(int A[],int n)
-{
-    int i,j,max,*C;
-    max=maxOfArray(A,n);
-    C=(int *)malloc(sizeof(int)*(max+1));
-    for(i=0;i<max+1;i++)
-    {
-        C[i]=0;
-    }
-    for(i=0;i<n;i++)
-    {
-        C[A[i]]++;
-    }
-    i=0;j=0;
-    while(j<max+1)
-    {
-        if(C[j]>0)
-        {
-            A[i++]=j;
-            C[j]--;
+//Radix Sort
+void RadixSort(int arr[], int size){
+    struct Node bitset[10];
+    int max = maxOfArray(arr, size);
+    int passes = numOfDigits(max);
+
+    for(int i = 1; i <= passes; i++){
+        int x = i;
+
+        for(int j = 0; j < size; j++){
+
         }
-        else
-            j++;
+
+
+
     }
 }
 
